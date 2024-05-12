@@ -1,0 +1,242 @@
+@font-face {
+    font-family: 'zabras';
+    src: url('fonts/zabars.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    font-family: 'zabras', Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: url('img/background.jpg') no-repeat center center fixed;
+    /* background-image: url('img/background.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(5px); */
+}
+
+h1 {
+    margin-block: 30px;
+    font-size: 64px;
+    letter-spacing: 5px;
+    text-shadow: 4px 4px 2px rgba(61, 61, 61, 0.5);
+}
+
+.screen {
+    max-width: 720px;
+    max-height: 500px;
+    display: flex;
+    justify-content: center;
+    width: 90vw;
+    aspect-ratio: 720 / 500;
+}
+
+.start_screen_img {
+    border-radius: 20px;
+    border: 10px solid black;
+    width: 100%;
+    height: auto;
+}
+
+.button_bar {
+    position: absolute;
+    display: flex;
+    flex-direction: column-reverse;
+    width: 90%;
+    max-width: 720px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button_bar img {
+    height: 40px;
+    width: 40px;
+    align-self: flex-end;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+#startBtn {
+    height: 50px;
+    width: 240px;
+    background-color: orange;
+    border-radius: 15px;
+    font-size: 32px;
+    font-family: 'zabras', Arial, Helvetica, sans-serif;
+    color: rgb(255, 254, 254);
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+#gameMenu {
+    background-image: url('img/5_background/layers/air.png');
+    background-size: cover;
+    border-radius: 20px;
+    border: 10px solid black;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    max-height: 480px;
+    justify-content: end;
+}
+
+#gameMenu img {
+    height: 100px;
+    width: 100px;
+    margin-top: 16px;
+    margin-left: 16px;
+    align-self: end;
+    cursor: pointer;
+    align-self: start;
+
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+    font-size: 48px;
+    justify-content: center;
+    align-items: center;
+}
+
+table td:first-child {
+    text-align: right;
+}
+
+td {
+    padding: 5px 20px;
+}
+
+#againBtn {
+    position: absolute;
+    height: 50px;
+    width: 240px;
+    background-color: orange;
+    border-radius: 15px;
+    font-size: 32px;
+    font-family: 'zabras', Arial, Helvetica, sans-serif;
+    color: white;
+    cursor: pointer;
+    align-self: end;
+    margin-bottom: 16px;
+}
+
+#restartBtn {
+    position: absolute;
+    height: 50px;
+    width: 240px;
+    background-color: orange;
+    border-radius: 15px;
+    font-size: 32px;
+    font-family: 'zabras', Arial, Helvetica, sans-serif;
+    color: rgb(255, 254, 254);
+    letter-spacing: 2px;
+    cursor: pointer;
+    align-self: end;
+    margin-bottom: 16px;
+
+}
+
+canvas {
+    width: 90vw;
+    max-width: 720px;
+    background-color: black;
+    border: 10px solid black;
+    border-radius: 20px;
+    display: block;
+}
+
+.impressum_link{
+    text-align: center;
+    font-size: 24px;
+    text-shadow: 2px 2px 4px black;
+    margin-top: 32px;
+    cursor: pointer;
+}
+
+.impressum_link a{
+    color: rgb(253, 253, 253);
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.d-none {
+    display: none;
+}
+
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 96.5%;
+    }
+
+    .controls {
+        font-size: 32px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .button_bar{
+        flex-direction:unset;
+        justify-content: space-around;
+    }
+    .button_bar img {
+        align-self: unset;
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+    td {
+        padding: 0px 10px;
+    }
+
+    #gameMenu img {
+        margin-top: 0;
+        height: 60px;
+        width: 60px;
+    }
+
+    h1 {
+        display: none;
+    }
+    .button_bar{
+        margin-top: 12px;
+    }
+
+    .button_bar img{
+        height: 30px;
+        width: 30px;
+        margin-right: 0px;
+    }
+    #startBtn{
+        height: 40px;
+        width: 120px;
+        font-size: 28px;
+    }
+    #restartBtn{
+        height: 40px;
+        width: 180px;
+        font-size: 28px;
+    }
+    #againBtn {
+        height: 32px;
+        width: 180px;
+        font-size: 28px;
+    }
+}
+
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+}
+
+@media m {}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Pollo Loco</title>
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="/models/drawable-object.class.js"></script>
+    <script src="/models/movable-object.class.js"></script>
+    <script src="/models/status-bar.class.js"></script>
+    <script src="/models/coin-bar.class.js"></script>
+    <script src="/models/bottle-bar.class.js"></script>
+    <script src="/models/endboss-health-bar.class.js"></script>
+    <script src="/models/throwable-object.class.js"></script>
+    <script src="/models/collectible-object.class.js"></script>
+    <script src="/models/coin-object.class.js"></script>
+    <script src="/models/bottle-object.class.js"></script>
+    <script src="/models/smashedBottle.class.js"></script>
+    <script src="/models/character.class.js"></script>
+    <script src="/models/chicken.class.js"></script>
+    <script src="/models/chickenSmall.class.js"></script>
+    <script src="/models/endboss.class.js"></script>
+    <script src="/models/cloud.class.js"></script>
+    <script src="/models/background-object.class.js"></script>
+    <script src="/models/world.class.js"></script>
+    <script src="/models/keyboard.class.js"></script>
+    <script src="/models/level.class.js"></script>
+    <script src="/levels/level1.js"></script>
+    <script src="/js/game.js"></script>
+</head>
+
+<body onload="init()">
+
+
+    <h1>El pollo loco</h1>
+    <div class="main_conatiner">
+        <div class="screen" id="startScreen">
+            <div class="button_bar">
+                <button id="startBtn" onclick="startGame()">Start</button>
+                <img src="/img/menu_icon.png" alt="" onclick="showMenu()">
+            </div>
+            <img class="start_screen_img" src="img/9_intro_outro_screens/start/startscreen_1.png" alt="">
+        </div>
+        <div class="screen d-none" id="gameMenu">
+            <div class="controls">
+                <table>
+                    <tr>
+                        <td>[SPACE] </td>
+                        <td>jump</td>
+                       </tr>
+                       <tr>
+                         <td>[<]</td>
+                         <td>left</td>
+                       </tr>
+                       <tr>
+                        <td>[>]</td>
+                        <td>right</td>
+                      </tr>
+                      <tr>
+                        <td>[D]</td>
+                        <td>throw bottle</td>
+                      </tr>
+                </table>
+            </div>
+            <img src="img/back_icon.png" alt="" onclick="leaveMenu()">
+        </div>
+        <div class="screen d-none" id="endScreenLost">
+            <button id="againBtn" onclick="restartGame()">Try again</button>
+            <img class="start_screen_img" src="img/9_intro_outro_screens/game_over/you lost.png" alt="">
+        </div>
+        <div class="screen d-none" id="endScreenWin">
+            <button id="restartBtn" onclick="restartGame()">Back to Main</button>
+            <img class="start_screen_img" src="img/9_intro_outro_screens/game_over/game over.png" alt="">
+        </div>
+
+
+        <canvas class="d-none" id="canvas" width="720" height="480"></canvas>
+        <div class="impressum_link">
+            <a href="impressum.html">Impressum</a>
+        </div>
+    </div>
+
+</body>
+
+</html>
