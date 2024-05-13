@@ -39,6 +39,14 @@ h1 {
     height: auto;
 }
 
+.ingame_menu img {
+    height: 40px;
+    width: 40px;
+    align-self: flex-end;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
 .button_bar {
     position: absolute;
     display: flex;
@@ -47,15 +55,7 @@ h1 {
     max-width: 720px;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
-}
-
-.button_bar img {
-    height: 40px;
-    width: 40px;
-    align-self: flex-end;
-    margin-right: 20px;
-    cursor: pointer;
+    margin-top: 40px;
 }
 
 #startBtn {
@@ -90,11 +90,11 @@ h1 {
     align-self: end;
     cursor: pointer;
     align-self: start;
-
 }
 
 .controls {
     display: flex;
+    height: 80%;
     flex-direction: column;
     color: rgb(0, 0, 0);
     font-size: 48px;
@@ -108,6 +108,21 @@ table td:first-child {
 
 td {
     padding: 5px 20px;
+}
+
+.lower_bar {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lower_bar a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 18px;
+    text-shadow: 2px 2px 2px rgba(61, 61, 61, 0.5);
+    margin-left: 24px;
 }
 
 #againBtn {
@@ -149,23 +164,23 @@ canvas {
     display: block;
 }
 
-.impressum_link{
+.impressum_link {
     text-align: center;
     font-size: 24px;
     text-shadow: 2px 2px 4px black;
     margin-top: 32px;
-    cursor: pointer;
 }
 
-.impressum_link a{
+.impressum_link a {
     color: rgb(253, 253, 253);
     text-decoration: none;
 }
 
-a:visited {
+.impressum_link a:visited:hover {
     color: rgb(255, 255, 255);
     text-decoration: none;
 }
+
 
 .d-none {
     display: none;
@@ -182,10 +197,11 @@ a:visited {
 }
 
 @media only screen and (max-width: 650px) {
-    .button_bar{
-        flex-direction:unset;
+    .button_bar {
+        flex-direction: unset;
         justify-content: space-around;
     }
+
     .button_bar img {
         align-self: unset;
     }
@@ -206,25 +222,36 @@ a:visited {
     h1 {
         display: none;
     }
-    .button_bar{
+
+    .impressum_link {
+        display: none;
+    }
+
+    .lower_bar a {
+        display: block;
+    }
+    .button_bar {
         margin-top: 12px;
     }
 
-    .button_bar img{
+    .button_bar img {
         height: 30px;
         width: 30px;
         margin-right: 0px;
     }
-    #startBtn{
+
+    #startBtn {
         height: 40px;
         width: 120px;
         font-size: 28px;
     }
-    #restartBtn{
+
+    #restartBtn {
         height: 40px;
         width: 180px;
         font-size: 28px;
     }
+
     #againBtn {
         height: 32px;
         width: 180px;
@@ -238,5 +265,3 @@ a:visited {
         height: 100vh;
     }
 }
-
-@media m {}
