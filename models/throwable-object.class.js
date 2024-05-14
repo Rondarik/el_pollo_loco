@@ -32,7 +32,7 @@ class ThrowableObject extends MovableObject {
     }
 
     isCollidingWithGround() {
-        return this.y > 280;
+        return this.y > 320;
     }
 
     smash() {

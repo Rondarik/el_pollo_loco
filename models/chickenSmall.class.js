@@ -14,6 +14,7 @@ class ChickenSmall extends MovableObject {
 
     damage = 2;
     energy = 1;
+    intervalID;
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
@@ -26,9 +27,9 @@ class ChickenSmall extends MovableObject {
 
     animate() {
 
-        setInterval(() => {
+        this.intervalID = setInterval(() => {
             if (!this.isDead()) {
-                // this.moveLeft();
+                this.moveLeft();
             }
         }, 1000 / 60);
 

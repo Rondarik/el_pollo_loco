@@ -5,6 +5,7 @@ class World {
     bottlebar = new BottleBar(30);
     endbossHealthbar = new EndbossHealthBar(100);
     showEndbossHealth = false;
+    endbossStarted = false;
     level = level1;
     canvas;
     ctx;
@@ -15,7 +16,6 @@ class World {
     throwables = [];
     smashedBottles = [];
     throw = true;
-
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
@@ -41,6 +41,7 @@ class World {
     startEndboss(){
         if (this.character.x > 1500) {
             this.showEndbossHealth = true;
+            this.endbossStarted = true;
         }
        
     }

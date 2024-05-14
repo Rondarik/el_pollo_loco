@@ -39,6 +39,22 @@ h1 {
     height: auto;
 }
 
+.ingame_menu{
+    display: flex;
+    justify-content: end;   
+}
+
+.ingame_menu_container{
+    position: absolute;
+    display: flex;
+    width: 90%;
+    max-width: 720px;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 10px;
+    justify-content: end;
+}
+
 .ingame_menu img {
     height: 40px;
     width: 40px;
@@ -50,12 +66,20 @@ h1 {
 .button_bar {
     position: absolute;
     display: flex;
-    flex-direction: column-reverse;
     width: 90%;
     max-width: 720px;
     align-items: center;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+
+.button_bar img{
+    height: 40px;
+    width: 40px;
+    align-self: flex-end;
+    margin-right: 20px;
+    cursor: pointer;
 }
 
 #startBtn {
@@ -67,6 +91,7 @@ h1 {
     font-family: 'zabras', Arial, Helvetica, sans-serif;
     color: rgb(255, 254, 254);
     letter-spacing: 2px;
+    margin-left: 16px;
     cursor: pointer;
 }
 
@@ -78,8 +103,8 @@ h1 {
     flex-direction: column;
     align-items: center;
     height: auto;
-    max-height: 480px;
     justify-content: end;
+    max-height: 460px !important;
 }
 
 #gameMenu img {
@@ -111,7 +136,7 @@ td {
 }
 
 .lower_bar {
-    width: 50%;
+    width: 70%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -232,12 +257,13 @@ canvas {
     }
     .button_bar {
         margin-top: 12px;
+        justify-content: space-between;
     }
 
     .button_bar img {
         height: 30px;
         width: 30px;
-        margin-right: 0px;
+        margin-right: 10px;
     }
 
     #startBtn {
@@ -262,6 +288,16 @@ canvas {
 
 @media only screen and (max-height: 480px) {
     canvas {
+        height: calc(100vh - 20px);
+    }
+    h1 {
+        display: none;
+    }
+    .screen {
         height: 100vh;
+
+    }
+    .impressum_link{
+        display: none;
     }
 }

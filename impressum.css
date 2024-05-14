@@ -1,0 +1,12 @@
+body {
+    background: url(img/5_background/second_half_background.png);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+   
+}
+
+.impressum{
+    text-align: center;
+}

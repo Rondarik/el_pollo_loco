@@ -13,6 +13,8 @@ class Chicken extends MovableObject {
     speedFactor = 0.15;
     damage = 5;
     energy = 1;
+    intervalID;
+
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
@@ -24,12 +26,10 @@ class Chicken extends MovableObject {
     }
 
     animate() {
-
-        setInterval(() => {
+       this.intervalID = setInterval(() => {
             if (!this.isDead()) {
-                // this.moveLeft();
-            }
-
+                this.moveLeft();
+            }            
         }, 1000 / 60);
 
 

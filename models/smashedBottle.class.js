@@ -1,6 +1,7 @@
 class SmashedBottle extends DrawableObject {
 
-
+    width = 100;
+    height = 100;
 
 
     IMAGES_BOTTLE_SPLASH = [
@@ -18,9 +19,7 @@ class SmashedBottle extends DrawableObject {
         this.x = x;
         this.y = y;
         this.loadImages(this.IMAGES_BOTTLE_SPLASH);
-        // this.animate();
     }
-    // i = 0;
     world;
 
     animate() {

@@ -42,11 +42,20 @@ function initlevel() {
         ],
         [
             new CoinObject(-470, 300),
+            new CoinObject(-470, 200),
             new CoinObject(-470, 100),
             new CoinObject(200, 300),
             new CoinObject(300, 100),
             new CoinObject(500, 100),
-            new CoinObject(600, 300)
+            new CoinObject(600, 300),
+            new CoinObject(800, 200),
+            new CoinObject(800, 130),
+            new CoinObject(900, 200),
+            new CoinObject(900, 130),
+            new CoinObject(1200, 100),
+            new CoinObject(1200, 200),
+            new CoinObject(1200, 300),
+            new CoinObject(1550, 300),
         ],
         [
             new BottleObject(-380, 350),
