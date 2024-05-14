@@ -47,9 +47,9 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/idle/I-9.png',
         'img/2_character_pepe/1_idle/idle/I-10.png',
     ]
-
     world;
-    walking_sound = new Audio('audio/running.mp3');
+    // walking_sound = new Audio('audio/running.mp3');
+    walking_sound = gameSounds.character_walk;
     offset = {
         left: 10,
         top: 100,

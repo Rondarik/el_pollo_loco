@@ -5,7 +5,8 @@ width = 160;
 height = 160;
 
 IMAGE = ['img/8_coin/coin_1.png'];
-sound = new Audio('audio/collect-coin.mp3');
+// sound = new Audio('audio/collect-coin.mp3');
+sound = gameSounds.collect_coin;
 
 offset = {
     left: 65,

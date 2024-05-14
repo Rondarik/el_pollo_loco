@@ -26,7 +26,7 @@ class MovableObject extends DrawableObject {
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {
-            return this.y <= 400;        
+            return this.y <= 400;
         } else {
             return this.y < 190;
         }
@@ -48,22 +48,23 @@ class MovableObject extends DrawableObject {
             !this.collitionDirection;
     }
 
-    jumpOn(obj){
+    jumpOn(obj) {
         return (this.x + this.width - this.offset.right) > (obj.x + obj.offset.left) &&
-        (this.y + this.height) > (obj.y + obj.offset.top) &&
-        (this.x + this.offset.left) < (obj.x + obj.width - obj.offset.right) &&
-        (this.y + this.offset.top) < (obj.y + obj.height - obj.offset.bottom) &&
-        this.collitionDirection;
+            (this.y + this.height) > (obj.y + obj.offset.top) &&
+            (this.x + this.offset.left) < (obj.x + obj.width - obj.offset.right) &&
+            (this.y + this.offset.top) < (obj.y + obj.height - obj.offset.bottom) &&
+            this.collitionDirection;
     }
 
     hit(damage) {
-        this.energy -= damage;
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
+        if (!this.isHurt()) {
+            this.energy -= damage;
+            if (this.energy < 0) {
+                this.energy = 0;
+            } else {
+                this.lastHit = new Date().getTime();
+            }
         }
-
     }
 
     isHurt() {

@@ -79,6 +79,21 @@ function restartInterval() {
     });
 }
 
+function toggleGameSoundMute() {
+    document.getElementById('muteBtnMenu').classList.toggle('d-none');
+    document.getElementById('unmuteBtnMenu').classList.toggle('d-none');
+    document.getElementById('muteBtn').classList.toggle('d-none');
+    document.getElementById('unmuteBtn').classList.toggle('d-none');
+
+    for (var i in gameSounds) {
+        gameSounds[i].muted = !gameSounds[i].muted;
+    }
+}
+
+function unmuteGameSounds() {
+
+}
+
 
 window.addEventListener('keydown', (event) => {
     if (event.keyCode == 37) {
@@ -99,8 +114,6 @@ window.addEventListener('keydown', (event) => {
     if (event.keyCode == 68) {
         keyboard.D = true;
     }
-
-    // console.log(event);
 });
 
 window.addEventListener('keyup', (event) => {
@@ -122,6 +135,4 @@ window.addEventListener('keyup', (event) => {
     if (event.keyCode == 68) {
         keyboard.D = false;
     }
-
-    // console.log(event);
 });

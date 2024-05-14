@@ -5,7 +5,6 @@ class World {
     bottlebar = new BottleBar(30);
     endbossHealthbar = new EndbossHealthBar(100);
     showEndbossHealth = false;
-    endbossStarted = false;
     level = level1;
     canvas;
     ctx;
@@ -41,13 +40,12 @@ class World {
     startEndboss(){
         if (this.character.x > 1500) {
             this.showEndbossHealth = true;
-            this.endbossStarted = true;
+            this.level.endboss[0.].startEndboss = true;
         }
-       
     }
 
     checkThrowObjects() {
-        if (this.keyboard.D && this.bottleCount > 0 && this.throw) {
+        if (this.keyboard.D && this.bottleCount > 0 && this.throw && !this.character.otherDirection) {
             this.throw = false;
             this.bottleCount -= 1;
             let bottle = new ThrowableObject(this.character.x + 90, this.character.y);

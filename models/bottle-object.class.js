@@ -9,7 +9,8 @@ class BottleObject extends CollectibleObject {
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
     ]
 
-    sound = new Audio('audio/collect-bottle.mp3');
+    // sound = new Audio('audio/collect-bottle.mp3');
+    sound = gameSounds.collect_bottle;
 
     offset = {
         left: 40,
