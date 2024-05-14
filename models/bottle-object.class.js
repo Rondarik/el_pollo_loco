@@ -19,10 +19,9 @@ class BottleObject extends CollectibleObject {
         bottom: 10        
     }
 
-    constructor(x,y){
-        super().loadImage(this.IMAGE[0]);
+    constructor(x,y,imgNumber){
+        super().loadImage(this.IMAGE[imgNumber]);
         this.x = x;
         this.y = y; 
     }
-
 }

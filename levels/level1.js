@@ -3,10 +3,17 @@ let level1;
 function initlevel() {
     level1 = new Level(
         [
-            // new Chicken(),
-            // new Chicken(),
-            // new Chicken(),
-            // new ChickenSmall()
+            new Chicken(0),
+            new Chicken(0),
+            new Chicken(0),
+            new Chicken(500),
+            new Chicken(800),
+            new Chicken(1200),
+            new Chicken(1200), 
+            new ChickenSmall(0),
+            new ChickenSmall(200),
+            new ChickenSmall(600),
+            new ChickenSmall(1000)
         ],
         [
             new Endboss()
@@ -44,9 +51,14 @@ function initlevel() {
             new CoinObject(-470, 300),
             new CoinObject(-470, 200),
             new CoinObject(-470, 100),
+            new CoinObject(-170, 300),
+            new CoinObject(-170, 200),
+            new CoinObject(-170, 100),
             new CoinObject(200, 300),
-            new CoinObject(300, 100),
-            new CoinObject(500, 100),
+            new CoinObject(250, 200),
+            new CoinObject(350, 100),
+            new CoinObject(450, 100),
+            new CoinObject(550, 200),
             new CoinObject(600, 300),
             new CoinObject(800, 200),
             new CoinObject(800, 130),
@@ -55,11 +67,16 @@ function initlevel() {
             new CoinObject(1200, 100),
             new CoinObject(1200, 200),
             new CoinObject(1200, 300),
-            new CoinObject(1550, 300),
+            new CoinObject(1550, 300)
         ],
         [
-            new BottleObject(-380, 350),
-            new BottleObject(430, 350),
+            new BottleObject(-380, 350, 0),
+            new BottleObject(-350, 350, 1),
+            new BottleObject(410, 350, 0),
+            new BottleObject(440, 350, 1),
+            new BottleObject(750, 350, 0),
+            new BottleObject(1000, 350, 1),
+            new BottleObject(1400, 350, 1)
         ]
     );
 }

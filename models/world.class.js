@@ -2,7 +2,7 @@ class World {
     character = new Character();
     healthbar = new StatusBar();
     coinbar = new CoinBar(0);
-    bottlebar = new BottleBar(30);
+    bottlebar = new BottleBar(3);
     endbossHealthbar = new EndbossHealthBar(100);
     showEndbossHealth = false;
     level = level1;
@@ -10,11 +10,12 @@ class World {
     ctx;
     keyboard;
     camara_x = 0;
-    bottleCount = 30;
+    bottleCount = 3;
     coinCount = 0;
     throwables = [];
     smashedBottles = [];
     throw = true;
+    enemySpawnRate = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
@@ -34,6 +35,7 @@ class World {
             this.checkCollisions();
             this.checkThrowObjects();
             this.startEndboss();
+            this.endlessChicken();
         }, 100);
     }
 
@@ -41,6 +43,8 @@ class World {
         if (this.character.x > 1500) {
             this.showEndbossHealth = true;
             this.level.endboss[0.].startEndboss = true;
+            gameSounds.game_theme.pause();
+            gameSounds.bossfight_sound.play();
         }
     }
 
@@ -48,8 +52,10 @@ class World {
         if (this.keyboard.D && this.bottleCount > 0 && this.throw && !this.character.otherDirection) {
             this.throw = false;
             this.bottleCount -= 1;
+            this.bottlebar.setPercentage(this.bottleCount);
             let bottle = new ThrowableObject(this.character.x + 90, this.character.y);
             this.throwables.push(bottle);
+            gameSounds.throwBottle_sound.play();
         }
     }
 
@@ -60,8 +66,9 @@ class World {
             if (this.character.isColliding(enemy) && (!this.level.enemies[index].isDead())) {
                 this.character.hit(this.level.enemies[index].damage);
                 this.healthbar.setPercentage(this.character.energy);
-            } else if (this.character.jumpOn(enemy)) {
+            } else if (this.character.jumpOn(enemy) && (!this.level.enemies[index].isDead())) {
                 this.level.enemies[index].hit(20);
+                gameSounds.jumpOnAnemy_sound.play();
             }
         });
         this.level.endboss.forEach((enemy, index) => {
@@ -92,6 +99,16 @@ class World {
             if (this.throwables[this.throwables.length - 1].isCollidingWithGround()) {
                 this.showSmashedBottleAnimation();
             }
+        }
+    }
+
+    endlessChicken(){
+        if (this.enemySpawnRate == 80) {
+            this.level.enemies.push(new Chicken(1800));
+            this.level.enemies.push(new ChickenSmall(2000));
+            this.enemySpawnRate = 0;
+        } else {
+            this.enemySpawnRate++;
         }
     }
 

@@ -28,6 +28,7 @@ class SmashedBottle extends DrawableObject {
         const animationInterval = setInterval(() => {
             if (i < 6) {
                 this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+                gameSounds.bollte_smash.play();
                 i++;
             } else {
                 this.world.deleteSmachedBottle();

@@ -29,7 +29,7 @@ class BottleBar extends DrawableObject {
 
     resolveImagesIndex(){
 
-        if (this.percentage > 10) {
+        if (this.percentage >= 10) {
             return 5;
         } else if (this.percentage >8){
             return 4;
@@ -37,7 +37,7 @@ class BottleBar extends DrawableObject {
             return 3;
         } else if (this.percentage >4){
             return 2;
-        } else if (this.percentage >2){
+        } else if (this.percentage >=1){
             return 1;
         } else {
             return 0;

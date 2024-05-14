@@ -36,7 +36,6 @@ class DrawableObject {
             console.warn('error: ', error);
             console.log(this.img);
         }
-     
     }
 
     drawFrame(ctx) {

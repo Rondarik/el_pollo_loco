@@ -48,7 +48,7 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/idle/I-10.png',
     ]
     world;
-    // walking_sound = new Audio('audio/running.mp3');
+
     walking_sound = gameSounds.character_walk;
     offset = {
         left: 10,
@@ -92,9 +92,13 @@ class Character extends MovableObject {
 
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                gameSounds.bossfight_sound.pause();
+                gameSounds.game_theme.pause();
+                gameSounds.gameLost_sound.play();
                 showLostScreen();
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
+                gameSounds.characterGetHurt.play();
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {

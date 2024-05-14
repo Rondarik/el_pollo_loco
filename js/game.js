@@ -19,6 +19,7 @@ function startGame() {
     document.getElementById('endScreenLost').classList.add('d-none');
     document.getElementById('endScreenWin').classList.add('d-none');
     document.getElementById('ingameMenu').classList.remove('d-none');
+    gameSounds.game_theme.play();
 }
 
 function showMenu() {
