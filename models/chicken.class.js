@@ -11,7 +11,7 @@ class Chicken extends MovableObject {
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
     ]
     speedFactor = 0.15;
-    damage = 5;
+    damage = 10;
     energy = 1;
     intervalID;
 

@@ -48,7 +48,6 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/idle/I-10.png',
     ]
     world;
-
     walking_sound = gameSounds.character_walk;
     offset = {
         left: 10,
@@ -66,10 +65,9 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_IDLE);
         this.applyGravity();
         this.animate();
-
     }
-    animate() {
 
+    animate() {
         setInterval(() => {
             this.walking_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -88,14 +86,18 @@ class Character extends MovableObject {
             this.world.camara_x = -this.x + 100;
         }, 1000 / 60);
 
+        let i = 0;
         setInterval(() => {
-
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-                gameSounds.bossfight_sound.pause();
-                gameSounds.game_theme.pause();
-                gameSounds.gameLost_sound.play();
-                showLostScreen();
+                if (i < 14) {
+                    this.playAnimation(this.IMAGES_DEAD);
+                    i++;
+                } else {
+                    gameSounds.bossfight_sound.pause();
+                    gameSounds.game_theme.pause();
+                    gameSounds.gameLost_sound.play();
+                    showLostScreen();
+                }
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
                 gameSounds.characterGetHurt.play();
@@ -106,7 +108,6 @@ class Character extends MovableObject {
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
             }
-
         }, 100);
     }
 }

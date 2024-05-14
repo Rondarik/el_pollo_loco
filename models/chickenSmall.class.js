@@ -12,7 +12,7 @@ class ChickenSmall extends MovableObject {
     ]
     speedFactor = 0.5;
 
-    damage = 2;
+    damage = 5;
     energy = 1;
     intervalID;
 
