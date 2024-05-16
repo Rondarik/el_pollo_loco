@@ -32,6 +32,18 @@ h1 {
     aspect-ratio: 720 / 500;
 }
 
+.landscape_massage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.landscape_massage img {
+    width: 50%;
+    height: fit-content;
+  
+}
+
 .start_screen_img {
     border-radius: 20px;
     border: 10px solid black;
@@ -39,20 +51,36 @@ h1 {
     height: auto;
 }
 
-.ingame_menu{
-    display: flex;
-    justify-content: end;   
-}
-
 .ingame_menu_container{
     position: absolute;
-    display: flex;
-    width: 90%;
     max-width: 720px;
-    align-items: center;
+    max-height: 500px;
+    width: 90vw;
+    display: flex;
+
+    flex-direction: column;
+    justify-content: space-between;
     margin-top: 20px;
     margin-left: 10px;
-    justify-content: end;
+}
+
+.aspect{
+    aspect-ratio: 720 / 480;
+}
+
+.ingame_menu{
+    align-self: flex-end;
+}
+
+.ingame_controls{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 80px;
+}
+
+.ingame_controls img{
+    width: 50px;
+    margin-right: 24px;
 }
 
 .ingame_menu img {
@@ -105,6 +133,7 @@ h1 {
     height: auto;
     justify-content: end;
     max-height: 460px !important;
+    aspect-ratio: 720 / 370;
 }
 
 #gameMenu img {
@@ -257,7 +286,6 @@ canvas {
     }
     .button_bar {
         margin-top: 12px;
-        justify-content: space-between;
     }
 
     .button_bar img {

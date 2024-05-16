@@ -47,12 +47,25 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/idle/I-9.png',
         'img/2_character_pepe/1_idle/idle/I-10.png',
     ]
+    IMAGES_LONG_IDLE = [
+        'img/2_character_pepe/1_idle/long_idle/I-11.png',
+        'img/2_character_pepe/1_idle/long_idle/I-12.png',
+        'img/2_character_pepe/1_idle/long_idle/I-13.png',
+        'img/2_character_pepe/1_idle/long_idle/I-14.png',
+        'img/2_character_pepe/1_idle/long_idle/I-15.png',
+        'img/2_character_pepe/1_idle/long_idle/I-16.png',
+        'img/2_character_pepe/1_idle/long_idle/I-17.png',
+        'img/2_character_pepe/1_idle/long_idle/I-18.png',
+        'img/2_character_pepe/1_idle/long_idle/I-19.png',
+        'img/2_character_pepe/1_idle/long_idle/I-20.png',
+    ]
     world;
     walking_sound = gameSounds.character_walk;
+    longIdleTimer = 0;
     offset = {
         left: 10,
         top: 100,
-        right: 10,
+        right: 30,
         bottom: 0
     }
 
@@ -63,6 +76,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_IDLE);
+        this.loadImages(this.IMAGES_LONG_IDLE);
         this.applyGravity();
         this.animate();
     }
@@ -74,14 +88,19 @@ class Character extends MovableObject {
                 this.moveRight();
                 this.otherDirection = false;
                 this.walking_sound.play();
+                this.longIdleTimer = 0;
             }
             if (this.world.keyboard.LEFT && this.x > -400) {
                 this.moveLeft();
                 this.otherDirection = true;
                 this.walking_sound.play();
+                this.longIdleTimer = 0;
             }
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
+                this.longIdleTimer = 0;
+            } else {
+                this.longIdleTimer++;
             }
             this.world.camara_x = -this.x + 100;
         }, 1000 / 60);
@@ -105,6 +124,8 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_WALKING);
+            } else if (this.longIdleTimer > 700) {
+                this.playAnimation(this.IMAGES_LONG_IDLE);
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
             }

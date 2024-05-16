@@ -16,6 +16,7 @@ class World {
     smashedBottles = [];
     throw = true;
     enemySpawnRate = 0;
+    CloudSpawnRate = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
@@ -36,6 +37,8 @@ class World {
             this.checkThrowObjects();
             this.startEndboss();
             this.endlessChicken();
+            this.endlessClouds();
+            bindBtsPresstevents();
         }, 100);
     }
 
@@ -106,12 +109,22 @@ class World {
         if (this.enemySpawnRate == 80) {
             this.level.enemies.push(new Chicken(1800));
             this.level.enemies.push(new ChickenSmall(2000));
+         
             this.enemySpawnRate = 0;
         } else {
             this.enemySpawnRate++;
         }
     }
 
+    endlessClouds(){
+        if (this.CloudSpawnRate == 250) {
+            this.level.clouds.push(new Cloud(2300));
+            this.CloudSpawnRate = 0;
+        } else {
+            this.CloudSpawnRate++;
+        }
+    }
+    
     showSmashedBottleAnimation() {
         this.smashedBottles.push(this.throwables[this.throwables.length - 1].smash());
         this.smashedBottles[this.throwables.length - 1].world = this;
@@ -146,21 +159,11 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camara_x, 0);
         this.addObjectsToMap(this.level.backgoundObjects);
         this.addObjectsToMap(this.level.clouds);
-
-        this.ctx.translate(-this.camara_x, 0);
-        // ------- space for fixed objects --------
-        this.addToMap(this.healthbar);
-        this.addToMap(this.coinbar);
-        this.addToMap(this.bottlebar);
-        if (this.showEndbossHealth) {
-            this.addToMap(this.endbossHealthbar);
-        }
-        this.ctx.translate(this.camara_x, 0);
-
+        // ------- function for fixed objects --------
+        this.drawFixedObjects();
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
         this.addToMap(this.character);
@@ -168,13 +171,22 @@ class World {
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwables);
         this.addObjectsToMap(this.smashedBottles);
-
         this.ctx.translate(-this.camara_x, 0);
-
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
         });
+    }
+
+    drawFixedObjects(){
+        this.ctx.translate(-this.camara_x, 0);
+        this.addToMap(this.healthbar);
+        this.addToMap(this.coinbar);
+        this.addToMap(this.bottlebar);
+        if (this.showEndbossHealth) {
+            this.addToMap(this.endbossHealthbar);
+        }
+        this.ctx.translate(this.camara_x, 0);
     }
 
     addObjectsToMap(objects) {

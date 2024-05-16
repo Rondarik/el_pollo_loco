@@ -1,5 +1,5 @@
 class ChickenSmall extends MovableObject {
-    y = 365;
+    y = 375;
     height = 50;
     width = 40;
     IMAGES_WALKING = [

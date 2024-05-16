@@ -36,11 +36,21 @@
 
     <h1>El pollo loco</h1>
     <div class="main_conatiner">
-        <div class="ingame_menu_container">
-            <div class="ingame_menu d-none" id="ingameMenu">
+        <div class="aspect d-none ingame_menu_container" id="ingameMenu">
+            <div class="ingame_menu" >
                 <img src="img/menu_icon.png" alt="" onclick="showMenu()">
                 <img id="muteBtnMenu" src="img/sound_icon.png" alt="" onclick="toggleGameSoundMute()">
                 <img id="unmuteBtnMenu" class="d-none" src="img/soundOff_icon.png" alt="" onclick="toggleGameSoundMute()">
+            </div>
+            <div class="ingame_controls" id="ingameControls">
+                <div>
+                <img id="btnLeft" src="img/arrow_left.png" alt="">
+                <img id="btnRight" src="img/arrow_right.png" alt="">
+            </div>
+            <div>
+                <img id="btnJump" src="img/arrow_up.png" alt="">
+                <img id="btnThrow" src="img/throw_bottle.png" alt="">
+            </div>
             </div>
         </div>
         <div class="screen" id="startScreen">
@@ -88,6 +98,9 @@
         <div class="screen d-none" id="endScreenWin">
             <button id="restartBtn" onclick="restartGame()">Back to Main</button>
             <img class="start_screen_img" src="img/9_intro_outro_screens/You won, you lost/You won A.png" alt="">
+        </div>
+        <div class="screen landscape_massage d-none" id="landscapeMassage">
+            <img src="img/landscapeMassage.png" alt="">
         </div>
 
         <canvas class="d-none" id="canvas" width="720" height="480"></canvas>

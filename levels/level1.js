@@ -3,23 +3,26 @@ let level1;
 function initlevel() {
     level1 = new Level(
         [
-            new Chicken(0),
-            new Chicken(0),
-            new Chicken(0),
-            new Chicken(500),
-            new Chicken(800),
-            new Chicken(1200),
-            new Chicken(1200), 
-            new ChickenSmall(0),
-            new ChickenSmall(200),
-            new ChickenSmall(600),
-            new ChickenSmall(1000)
+            // new Chicken(0),
+            // new Chicken(0),
+            // new Chicken(0),
+            // new Chicken(500),
+            // new Chicken(800),
+            // new Chicken(1200),
+            // new Chicken(1200), 
+            // new ChickenSmall(0),
+            // new ChickenSmall(200),
+            // new ChickenSmall(600),
+            // new ChickenSmall(1000)
         ],
         [
             new Endboss()
         ],
         [
-            new Cloud()
+            new Cloud(0),
+            new Cloud(800),
+            new Cloud(1600),
+            new Cloud(2300)
         ],
         [
             new BackgroundObject('img/5_background/layers/air.png', -719),
