@@ -17,6 +17,7 @@ class World {
     throw = true;
     enemySpawnRate = 0;
     CloudSpawnRate = 0;
+    mainLoop;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext("2d");
@@ -32,7 +33,7 @@ class World {
     }
 
     run() {
-        setInterval(() => {
+        this.mainLoop = setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
             this.startEndboss();

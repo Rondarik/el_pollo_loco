@@ -4,26 +4,9 @@ let keyboard = new Keyboard();
 let gameStarted = false;
 let isMobile = false;
 
-window.matchMedia("(orientation: portrait)").addEventListener("change", e => {
-    const portrait = e.matches;
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        if (portrait) {
-            landscapeMassage();
-        } else {
-            document.getElementById('landscapeMassage').classList.add('d-none');
-            restartGame();
-            clearAllIntervals();
-        }
-        isMobile = true;
-    } else {
-        isMobile = false;
-    }
-});
-
 function init() {
     canvas = document.getElementById('canvas');
 }
-
 
 function landscapeMassage() {
     document.getElementById('canvas').classList.add('d-none');
@@ -113,12 +96,14 @@ function stopIntervals() {
     world.level.enemies.forEach((enemy) => {
         clearInterval(enemy.intervalID);
     });
+    clearInterval(world.mainLoop);
 }
 
 function restartIntervals() {
     world.level.enemies.forEach((enemy) => {
         enemy.animate();
     });
+    world.run();
 }
 
 function toggleGameSoundMute() {
