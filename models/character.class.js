@@ -62,6 +62,7 @@ class Character extends MovableObject {
     world;
     walking_sound = gameSounds.character_walk;
     longIdleTimer = 0;
+    deadAnimationCounter = 0;
     offset = {
         left: 10,
         top: 100,
@@ -69,6 +70,11 @@ class Character extends MovableObject {
         bottom: 0
     }
 
+    /**
+     * Constructor function for initializing the character.
+     *
+     * @return {void} Initializes the character with various images and animations.
+     */
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -81,42 +87,86 @@ class Character extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Animate the character by moving and handling interactions.
+     *
+     * @return {void} No return value.
+     */
     animate() {
+        this.moveAnimations();
+        this.interactionAnimations();
+    }
+
+    /**
+     * Performs animations for character movements, including walking, jumping, and idle states.
+     *
+     * @return {void} No return value.
+     */
+    moveAnimations() {
         setInterval(() => {
-            this.walking_sound.pause();
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-                this.otherDirection = false;
-                this.walking_sound.play();
-                this.longIdleTimer = 0;
-            }
-            if (this.world.keyboard.LEFT && this.x > -400) {
-                this.moveLeft();
-                this.otherDirection = true;
-                this.walking_sound.play();
-                this.longIdleTimer = 0;
-            }
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.jump();
-                this.longIdleTimer = 0;
-            } else {
-                this.longIdleTimer++;
-            }
+            this.moveRightAnimation();
+            this.moveLeftAnimation();
+            this.jumpAnimation();
             this.world.camara_x = -this.x + 100;
         }, 1000 / 60);
+    }
 
-        let i = 0;
+    /**
+     * Animates the character movement to the right based on keyboard input and position.
+     *
+     * @param None
+     * @return None
+     */
+    moveRightAnimation() {
+        this.walking_sound.pause();
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            this.moveRight();
+            this.otherDirection = false;
+            this.walking_sound.play();
+            this.longIdleTimer = 0;
+        }
+    }
+
+    /**
+     * Moves the character to the left if the left arrow key is pressed and the character's position is greater than -400.
+     *
+     * @param None
+     * @return None
+     */
+    moveLeftAnimation() {
+        if (this.world.keyboard.LEFT && this.x > -400) {
+            this.moveLeft();
+            this.otherDirection = true;
+            this.walking_sound.play();
+            this.longIdleTimer = 0;
+        }
+    }
+
+    /**
+     * Executes the jump animation if the space key is pressed and the character is not above the ground; otherwise, increments the long idle timer.
+     *
+     * @param None
+     * @return None
+     */
+    jumpAnimation() {
+        if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            this.jump();
+            this.longIdleTimer = 0;
+        } else {
+            this.longIdleTimer++;
+        }
+    }
+
+    /**
+     * Executes various animations based on character state.
+     *
+     * @return {void} No return value.
+     */
+    interactionAnimations() {
+        this.deadAnimationCounter = 0;
         setInterval(() => {
             if (this.isDead()) {
-                if (i < 14) {
-                    this.playAnimation(this.IMAGES_DEAD);
-                    i++;
-                } else {
-                    gameSounds.bossfight_sound.pause();
-                    gameSounds.game_theme.pause();
-                    gameSounds.gameLost_sound.play();
-                    showLostScreen();
-                }
+                this.deadAnimation();
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
                 gameSounds.characterGetHurt.play();
@@ -131,4 +181,31 @@ class Character extends MovableObject {
             }
         }, 100);
     }
+
+    /**
+     * Executes the dead animation based on the deadAnimationCounter value.
+     *
+     * @return {void} No return value.
+     */
+    deadAnimation() {
+        if ( this.deadAnimationCounter  < 14) {
+            this.playAnimation(this.IMAGES_DEAD);
+            this.deadAnimationCounter++;
+        } else {
+            this.gameEnd();
+        }
+    }
+
+    /**
+     * Stops boss fight sound, game theme sound, plays game lost sound, and shows the lost screen.
+     *
+     * @return {void} No return value
+     */
+    gameEnd() {
+        gameSounds.bossfight_sound.pause();
+        gameSounds.game_theme.pause();
+        gameSounds.gameLost_sound.play();
+        showLostScreen();
+    }
 }
+

@@ -7,6 +7,10 @@ class Level {
     bottles;
     level_end_x = 2250;
 
+    /**
+     * Constructor for creating a new Level object.
+     *
+     */
     constructor(enemies, endboss, clouds, backgoundObjects, coins, bottles) {
         this.enemies = enemies;
         this.endboss = endboss;

@@ -11,11 +11,16 @@ class ChickenSmall extends MovableObject {
         'img/3_enemies_chicken/chicken_small/2_dead/dead.png'
     ]
     speedFactor = 0.5;
-
     damage = 5;
     energy = 1;
     intervalID;
 
+    /**
+     * Constructor function for initializing the ChickenSmall object with the given offset.
+     *
+     * @param {number} offset - The offset value for positioning the ChickenSmall object.
+     * @return {void} Initializes the ChickenSmall object with images, speed, position, and animation.
+     */
     constructor(offset) {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
@@ -25,15 +30,17 @@ class ChickenSmall extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Executes animations for the chicken object based on its state.
+     *
+     * @return {void} No return value.
+     */
     animate() {
-
         this.intervalID = setInterval(() => {
             if (!this.isDead()) {
                 this.moveLeft();
             }
         }, 1000 / 60);
-
-
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
@@ -42,6 +49,4 @@ class ChickenSmall extends MovableObject {
             }
         }, 100);
     }
-
-
 }

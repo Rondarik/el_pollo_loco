@@ -17,7 +17,6 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/2_alert/G10.png',
         'img/4_enemie_boss_chicken/2_alert/G11.png',
         'img/4_enemie_boss_chicken/2_alert/G12.png'
-   
     ]
     IMAGES_ATTACK = [
         'img/4_enemie_boss_chicken/3_attack/G13.png',
@@ -41,14 +40,21 @@ class Endboss extends MovableObject {
     ]
     energy = 100;
     damage = 50;
+    startEndboss = false;
+    deadAnimationCounter = 0;
+    bossAnimationCounter = 0;
     offset = {
         left: 0,
         top: 50,
         right: 0,
         bottom: 50
     }
-    startEndboss = false;
 
+    /**
+     * Constructor function for initializing the Endboss object with default values.
+     *
+     * @return {void} Initializes the Endboss with images, speed, position, and animation.
+     */
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
         this.loadImages(this.IMAGES_ALERT);
@@ -61,35 +67,76 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Executes animations based on certain conditions.
+     *
+     * @return {void} Executes animations at intervals based on conditions.
+     */
     animate() {
         this.moveLeft();
-        let i = 0;
-        let j = 0;
+        this.deadAnimationCounter = 0;
+        this.bossAnimationCounter = 0;
         setInterval(() => {
             if (this.isDead()) {
-                if (i < 10) {
-                    this.playAnimation(this.IMAGES_DEAD);
-                    i++;
-                } else {
-                    gameSounds.bossfight_sound.pause();
-                    gameSounds.victory_sound.play();
-                   
-                    showWinningScreen();
-                }
+                this.deadAnimation();
             } else if (this.startEndboss) {
-                if (j < 10) {
-                    this.playAnimation(this.IMAGES_ATTACK);
-                    j++;
-                } else if (this.isHurt()){
-                    this.playAnimation(this.IMAGES_HURT);
-                }   else {
-                    this.playAnimation(this.IMAGES_WALKING);
-                    this.speed = 50;
-                    this.moveLeft();
-                }
+                this.bossAnimation();
             } else {
                 this.playAnimation(this.IMAGES_ALERT);
             }
         }, 200);
+    }
+
+    /**
+     * Executes the dead animation based on the deadAnimationCounter value.
+     *
+     * @return {void} No return value.
+     */
+    deadAnimation() {
+        if (this.deadAnimationCounter < 10) {
+            this.playAnimation(this.IMAGES_DEAD);
+            this.deadAnimationCounter++;
+        } else {
+            this.gameEnd();
+        }
+    }
+
+    /**
+     * Handles the boss animation based on animation counters and boss status.
+     *
+     * @return {void} No return value.
+     */
+    bossAnimation() {
+        if (this.bossAnimationCounter < 10) {
+            this.playAnimation(this.IMAGES_ATTACK);
+            this.bossAnimationCounter++;
+        } else if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+            this.moveLeft();
+        } else {
+            this.bossWalks();
+        }
+    }
+
+    /**
+     * Stops boss fight sound, plays victory sound, and shows the winning screen.
+     *
+     * @return {void} No return value
+     */
+    gameEnd() {
+        gameSounds.bossfight_sound.pause();
+        gameSounds.victory_sound.play();
+        showWinningScreen();
+    }
+
+    /**
+     * Moves the boss character by playing the walking animation, setting the speed, and moving left.
+     *
+     * @return {void} Does not return anything.
+     */
+    bossWalks() {
+        this.playAnimation(this.IMAGES_WALKING);
+        this.speed = 50;
+        this.moveLeft();
     }
 }

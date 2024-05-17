@@ -9,7 +9,12 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     collitionDirection = false;
 
-
+    /**
+     * Applies gravity to the object by updating its vertical position based on speed and acceleration.
+     *
+     * @param None
+     * @return None
+     */
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -24,6 +29,12 @@ class MovableObject extends DrawableObject {
         }, 1000 / 25);
     }
 
+    /**
+     * Checks if the object is above the ground based on its vertical position.
+     *
+     * @param None
+     * @return {boolean} True if the object is above the ground, false otherwise.
+     */
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return this.y <= 400;
@@ -32,14 +43,32 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Moves the object to the right based on its speed.
+     *
+     * @param None
+     * @return None
+     */
     moveRight() {
         this.x += this.speed;
     }
 
+    /**
+     * Moves the object to the left by subtracting the speed from its horizontal position.
+     *
+     * @param None
+     * @return None
+     */
     moveLeft() {
         this.x -= this.speed;
     }
 
+    /**
+     * Checks if the object is colliding with another object based on their positions and dimensions.
+     *
+     * @param {Object} obj - The object to check collision with.
+     * @return {boolean} True if the object is colliding with the provided object, false otherwise.
+     */
     isColliding(obj) {
         return (this.x + this.width - this.offset.right) > (obj.x + obj.offset.left) &&
             (this.y + this.height) > (obj.y + obj.offset.top) &&
@@ -48,6 +77,12 @@ class MovableObject extends DrawableObject {
             !this.collitionDirection;
     }
 
+    /**
+     * Checks if this object can jump on another object based on collision conditions.
+     *
+     * @param {Object} obj - The object to jump on.
+     * @return {boolean} True if this object can jump on the other object, false otherwise.
+     */
     jumpOn(obj) {
         return (this.x + this.width - this.offset.right) > (obj.x + obj.offset.left) &&
             (this.y + this.height) > (obj.y + obj.offset.top) &&
@@ -56,6 +91,12 @@ class MovableObject extends DrawableObject {
             this.collitionDirection;
     }
 
+    /**
+     * Applies damage to the object if it's not currently hurt, updates energy, and records the time of the last hit.
+     *
+     * @param {number} damage - The amount of damage to apply to the object.
+     * @return {void} No explicit return value.
+     */
     hit(damage) {
         if (!this.isHurt()) {
             this.energy -= damage;
@@ -67,16 +108,34 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Calculates the time passed since the last hit and returns whether it's less than 0.6 seconds.
+     *
+     * @param None
+     * @return {boolean} True if the time passed is less than 0.6 seconds, false otherwise
+     */
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
         return timepassed < 0.6;
     }
 
+    /**
+     * Checks if the object is dead based on its energy level.
+     *
+     * @param None
+     * @return {boolean} True if the object's energy is 0, false otherwise.
+     */
     isDead() {
         return this.energy == 0;
     }
 
+    /**
+     * Sets the vertical speed to 20 for jumping.
+     *
+     * @param None
+     * @return None
+     */
     jump() {
         this.speedY = 20;
     }

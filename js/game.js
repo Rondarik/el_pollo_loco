@@ -4,10 +4,19 @@ let keyboard = new Keyboard();
 let gameStarted = false;
 let isMobile = false;
 
-function init() {
-    canvas = document.getElementById('canvas');
+/**
+ * Initializes the canvas element by calling the loadCanvas function.
+ *
+ * @return {Promise<void>} 
+ */
+async function init() {
+    await loadCanvas();
 }
 
+/**
+ * Hides certain elements and shows the 'landscapeMassage' element.
+ *
+ */
 function landscapeMassage() {
     document.getElementById('canvas').classList.add('d-none');
     document.getElementById('startScreen').classList.add('d-none');
@@ -17,8 +26,14 @@ function landscapeMassage() {
     document.getElementById('landscapeMassage').classList.remove('d-none');
 }
 
-
-function startGame() {
+/**
+ * Starts the game by initializing level, setting gameStarted to true, creating a world, and displaying canvas and game menu.
+ *
+ */
+async function startGame() {
+    if (!canvas) {
+        await loadCanvas();
+    }
     initlevel();
     gameStarted = true;
     world = new World(canvas, keyboard);
@@ -29,8 +44,22 @@ function startGame() {
     document.getElementById('ingameMenu').classList.remove('d-none');
     showIngameControls('show');
     gameSounds.game_theme.play();
+
 }
 
+/**
+ * Loads the canvas element by getting the element with id 'canvas'.
+ *
+ * @return {Promise<void>} 
+ */
+async function loadCanvas() {
+    canvas = document.getElementById('canvas');
+}
+
+/**
+ * Shows the game menu and hides other screens based on the game state.
+ *
+ */
 function showMenu() {
     document.getElementById('endScreenLost').classList.add('d-none');
     document.getElementById('gameMenu').classList.remove('d-none');
@@ -46,6 +75,10 @@ function showMenu() {
     }
 }
 
+/**
+ * Hides menu and shows canvas or start screen based on the game state.
+ *
+ */
 function leaveMenu() {
     document.getElementById('gameMenu').classList.add('d-none');
     document.getElementById('endScreenWin').classList.add('d-none');
@@ -60,6 +93,11 @@ function leaveMenu() {
     }
 }
 
+/**
+ * Shows the winning screen by hiding the canvas. Sets gameStarted to false and clears all intervals.
+ *
+ * @return {void} No return value
+ */
 function showWinningScreen() {
     document.getElementById('canvas').classList.add('d-none');
     document.getElementById('endScreenWin').classList.remove('d-none');
@@ -68,6 +106,11 @@ function showWinningScreen() {
     clearAllIntervals();
 }
 
+/**
+ * Shows the lost screen by hiding the canvas. Setting gameStarted to false and clearing all intervals.
+ *
+ * @return {void} No return value
+ */
 function showLostScreen() {
     document.getElementById('canvas').classList.add('d-none');
     document.getElementById('endScreenLost').classList.remove('d-none');
@@ -76,6 +119,11 @@ function showLostScreen() {
     clearAllIntervals();
 }
 
+/**
+ * Restarts the game by hiding certain elements, setting game state to false, clearing intervals, and stopping sound.
+ *
+ * @return {void} No return value
+ */
 function restartGame() {
     document.getElementById('canvas').classList.add('d-none');
     document.getElementById('startScreen').classList.remove('d-none');
@@ -88,10 +136,18 @@ function restartGame() {
     stopSound();
 }
 
+/**
+ * Clears all intervals.
+ *
+ * @return {void} No return value
+ */
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
+/**
+ * Stops all intervals for enemies and the main game loop.
+ */
 function stopIntervals() {
     world.level.enemies.forEach((enemy) => {
         clearInterval(enemy.intervalID);
@@ -99,6 +155,10 @@ function stopIntervals() {
     clearInterval(world.mainLoop);
 }
 
+/**
+ * Restarts intervals for enemies by animating each enemy and running the game.
+ *
+ */
 function restartIntervals() {
     world.level.enemies.forEach((enemy) => {
         enemy.animate();
@@ -106,6 +166,10 @@ function restartIntervals() {
     world.run();
 }
 
+/**
+ * Toggles the mute button for game sound and toggles the muted state of game sounds.
+ *
+ */
 function toggleGameSoundMute() {
     document.getElementById('muteBtnMenu').classList.toggle('d-none');
     document.getElementById('unmuteBtnMenu').classList.toggle('d-none');
@@ -116,27 +180,38 @@ function toggleGameSoundMute() {
     }
 }
 
+/**
+ * Stops all sounds in the gameSounds object by pausing each sound.
+ *
+ */
 function stopSound() {
     for (var i in gameSounds) {
         gameSounds[i].pause();
     }
 }
 
-function showIngameControls(order){
+/**
+ * Shows or hide in-game controls based on the order provided.
+ *
+ * @param {string} order - The order to show or hide the in-game controls.
+ */
+function showIngameControls(order) {
     if (isMobile) {
         if (order == 'show') {
             document.getElementById('ingameControls').classList.remove('d-none');
-            console.log('show');
         } else {
             document.getElementById('ingameControls').classList.add('d-none');
-            console.log('hide');
         }
     } else {
         document.getElementById('ingameControls').classList.add('d-none');
-        console.log('hide immer');
     }
 }
 
+/**
+ * Binds touchstart and touchend events to specific buttons to handle keyboard inputs.
+ *
+ * @return {void} No return value
+ */
 function bindBtsPresstevents() {
     document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
         e.preventDefault();
@@ -170,9 +245,14 @@ function bindBtsPresstevents() {
         e.preventDefault();
         keyboard.D = false;
     });
-   
+
 }
 
+/**
+ * Handle keyboard inputs by keydown.
+ *
+ * @return {void} No return value
+ */
 window.addEventListener('keydown', (event) => {
     if (event.keyCode == 37) {
         keyboard.LEFT = true;
@@ -194,6 +274,11 @@ window.addEventListener('keydown', (event) => {
     }
 });
 
+/**
+ * Handle keyboard inputs by keyup.
+ *
+ * @return {void} No return value
+ */
 window.addEventListener('keyup', (event) => {
     if (event.keyCode == 37) {
         keyboard.LEFT = false;

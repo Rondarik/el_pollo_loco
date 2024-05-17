@@ -1,15 +1,16 @@
 class CollectibleObject extends DrawableObject {
     sound;
 
-    constructor(x,y){
+    constructor(x, y) {
         super();
-      
     }
 
-    collect(){
-       this.sound.play();
-        
+    /**
+     * Executes the collection action by playing the sound associated with the collectible object.
+     *
+     * @return {void} No return value
+     */
+    collect() {
+        this.sound.play();
     };
-
-
 }

@@ -15,7 +15,12 @@ class Chicken extends MovableObject {
     energy = 1;
     intervalID;
 
-
+    /**
+     * Constructor function for initializing the Chicken object with the given offset.
+     *
+     * @param {number} offset - The offset value for positioning the chicken.
+     * @return {void} Initializes the Chicken object with images, speed, position, and animation.
+     */
     constructor(offset) {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
@@ -25,14 +30,17 @@ class Chicken extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Executes animations for the chicken object based on its state.
+     *
+     * @return {void} No return value.
+     */
     animate() {
-       this.intervalID = setInterval(() => {
+        this.intervalID = setInterval(() => {
             if (!this.isDead()) {
                 this.moveLeft();
-            }            
+            }
         }, 1000 / 60);
-
-
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
